@@ -12,6 +12,7 @@ module.exports = class BaseClient extends Client {
 				Intents.FLAGS.GUILD_MESSAGES,
 				Intents.FLAGS.DIRECT_MESSAGES
 			],
+			partials: ['CHANNEL', 'MESSAGE'],
 			allowedMentions: {
 				parse: ['users', 'roles'],
 				repliedUser: false
