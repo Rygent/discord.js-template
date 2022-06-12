@@ -22,7 +22,8 @@ export default class Util {
 
 	get directory() {
 		const { pathname } = new URL('../index.js', import.meta.url);
-		return `${path.dirname(pathname.slice(1)) + path.sep}`.replace(/\\/g, '/');
+		if (process.platform === 'win32') return `${path.dirname(pathname.slice(1)) + path.sep}`.replace(/\\/g, '/');
+		else return `${path.dirname(pathname) + path.sep}`.replace(/\\/g, '/');
 	}
 
 	formatArray(array, { style = 'short', type = 'conjunction' } = {}) {
