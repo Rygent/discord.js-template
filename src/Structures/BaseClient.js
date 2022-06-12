@@ -1,4 +1,4 @@
-import { Client, Intents } from 'discord.js';
+import { Client, Intents, Permissions } from 'discord.js';
 import { Collection } from '@discordjs/collection';
 import Util from './Util.js';
 import semver from 'semver';
@@ -44,6 +44,10 @@ export default class BaseClient extends Client {
 		if (!options.owners.length) throw new Error('You must pass a list of owner(s) for the Client.');
 		if (!Array.isArray(options.owners)) throw new TypeError('Owner(s) should be a type of Array<String>.');
 		this.owners = options.owners;
+
+		if (!options.defaultPermissions.length) throw new Error('You must pass default permission(s) for the Client.');
+		if (!Array.isArray(options.defaultPermissions)) throw new TypeError('Permission(s) should be a type of Array<String>.');
+		this.defaultPermissions = new Permissions(options.defaultPermissions).freeze();
 	}
 
 	async start(token = this.token) {

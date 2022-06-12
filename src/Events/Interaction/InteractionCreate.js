@@ -22,6 +22,24 @@ export default class extends Event {
 				return interaction.reply({ content: 'This command cannot be used out of a server.', ephemeral: true });
 			}
 
+			if (interaction.inGuild()) {
+				const memberPermCheck = command.memberPermissions ? this.client.defaultPermissions.add(command.memberPermissions) : this.client.defaultPermissions;
+				if (memberPermCheck) {
+					const missing = interaction.channel.permissionsFor(interaction.member).missing(memberPermCheck);
+					if (missing.length) {
+						return interaction.reply({ content: `You lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.`, ephemeral: true });
+					}
+				}
+
+				const clientPermCheck = command.clientPermissions ? this.client.defaultPermissions.add(command.clientPermissions) : this.client.defaultPermissions;
+				if (clientPermCheck) {
+					const missing = interaction.channel.permissionsFor(interaction.guild.me).missing(clientPermCheck);
+					if (missing.length) {
+						return interaction.reply({ content: `I lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.`, ephemeral: true });
+					}
+				}
+			}
+
 			if (command.ownerOnly && !this.client.owners.includes(interaction.user.id)) {
 				return interaction.reply({ content: 'This command is only accessible for developers.', ephemeral: true });
 			}

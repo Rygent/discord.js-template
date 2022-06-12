@@ -27,6 +27,25 @@ export default class extends Event {
 		const command = this.client.commands.get(cmd.toLowerCase()) || this.client.commands.get(this.client.aliases.get(cmd.toLowerCase()));
 		if (command) {
 			if (command.disabled && !this.client.owners.includes(message.author.id)) return;
+
+			if (message.inGuild()) {
+				const memberPermCheck = command.memberPermissions ? this.client.defaultPermissions.add(command.memberPermissions) : this.client.defaultPermissions;
+				if (memberPermCheck) {
+					const missing = message.channel.permissionsFor(message.member).missing(memberPermCheck);
+					if (missing.length) {
+						return message.reply({ content: `You lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` });
+					}
+				}
+
+				const clientPermCheck = command.clientPermissions ? this.client.defaultPermissions.add(command.clientPermissions) : this.client.defaultPermissions;
+				if (clientPermCheck) {
+					const missing = message.channel.permissionsFor(message.guild.me).missing(clientPermCheck);
+					if (missing.length) {
+						return message.reply({ content: `I lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` });
+					}
+				}
+			}
+
 			if (command.ownerOnly && !this.client.owners.includes(message.author.id)) return;
 
 			try {
