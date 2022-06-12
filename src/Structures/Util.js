@@ -2,6 +2,7 @@ import { URL } from 'node:url';
 import { promisify } from 'node:util';
 import path from 'node:path';
 import glob from 'glob';
+import Interaction from './Interaction.js';
 import Command from './Command.js';
 import Event from './Event.js';
 
@@ -22,6 +23,19 @@ export default class Util {
 	get directory() {
 		const { pathname } = new URL('../index.js', import.meta.url);
 		return `${path.dirname(pathname.slice(1)) + path.sep}`.replace(/\\/g, '/');
+	}
+
+	async loadInteractions() {
+		return globber(`${this.directory}Commands/?(Slash)/**/*.js`).then(async (interactions) => {
+			for (const interactionFile of interactions) {
+				const { name } = path.parse(interactionFile);
+				const { default: File } = await import(`file://${interactionFile}`);
+				if (!this.isClass(File)) throw new TypeError(`Interaction ${name} doesn't export a class.`);
+				const interaction = new File(this.client, name.toLowerCase());
+				if (!(interaction instanceof Interaction)) throw new TypeError(`Interaction ${name} doesn't belong in Interactions directory.`);
+				this.client.interactions.set(interaction.name.join('-'), interaction);
+			}
+		});
 	}
 
 	async loadCommands() {

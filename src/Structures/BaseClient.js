@@ -21,6 +21,7 @@ export default class BaseClient extends Client {
 
 		this.validate(options);
 
+		this.interactions = new Collection();
 		this.commands = new Collection();
 		this.aliases = new Collection();
 		this.events = new Collection();
@@ -46,6 +47,7 @@ export default class BaseClient extends Client {
 	}
 
 	async start(token = this.token) {
+		this.utils.loadInteractions();
 		this.utils.loadCommands();
 		this.utils.loadEvents();
 		super.login(token);
