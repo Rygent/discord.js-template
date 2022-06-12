@@ -10,7 +10,7 @@ export default class extends Event {
 	}
 
 	async run(interaction) {
-		if (!interaction.isCommand()) return;
+		if (!interaction.isCommand() && !interaction.isContextMenu()) return;
 
 		const command = this.client.interactions.get(this.getCommandName(interaction));
 		if (command) {

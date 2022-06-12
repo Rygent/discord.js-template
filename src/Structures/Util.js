@@ -26,7 +26,7 @@ export default class Util {
 	}
 
 	async loadInteractions() {
-		return globber(`${this.directory}Commands/?(Slash)/**/*.js`).then(async (interactions) => {
+		return globber(`${this.directory}Commands/?(Context|Slash)/**/*.js`).then(async (interactions) => {
 			for (const interactionFile of interactions) {
 				const { name } = path.parse(interactionFile);
 				const { default: File } = await import(`file://${interactionFile}`);
