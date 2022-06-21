@@ -25,22 +25,6 @@ export default class Util {
 		return `${path.dirname(main) + path.sep}`.replace(/\\/g, '/');
 	}
 
-	formatArray(array, { style = 'short', type = 'conjunction' } = {}) {
-		return new Intl.ListFormat('en-US', { style, type }).format(array);
-	}
-
-	formatPermissions(permissions) {
-		return permissions.toLowerCase()
-			.replace(/(^|"|_)(\S)/g, (string) => string.toUpperCase())
-			.replace(/_/g, ' ')
-			.replace(/To|And|In\b/g, (string) => string.toLowerCase())
-			.replace(/ Instant| Embedded/g, '')
-			.replace(/Guild/g, 'Server')
-			.replace(/Moderate/g, 'Timeout')
-			.replace(/Tts/g, 'Text-to-Speech')
-			.replace(/Use Vad/g, 'Use Voice Acitvity');
-	}
-
 	async loadInteractions() {
 		return globber(`${this.directory}Commands/?(Context|Slash)/**/*.js`).then(async (interactions) => {
 			for (const interactionFile of interactions) {
@@ -84,6 +68,22 @@ export default class Util {
 				event.emitter[event.type](event.name, (...args) => event.run(...args));
 			}
 		});
+	}
+
+	static formatArray(array, { style = 'short', type = 'conjunction' } = {}) {
+		return new Intl.ListFormat('en-US', { style, type }).format(array);
+	}
+
+	static formatPermissions(permissions) {
+		return permissions.toLowerCase()
+			.replace(/(^|"|_)(\S)/g, (string) => string.toUpperCase())
+			.replace(/_/g, ' ')
+			.replace(/To|And|In\b/g, (string) => string.toLowerCase())
+			.replace(/ Instant| Embedded/g, '')
+			.replace(/Guild/g, 'Server')
+			.replace(/Moderate/g, 'Timeout')
+			.replace(/Tts/g, 'Text-to-Speech')
+			.replace(/Use Vad/g, 'Use Voice Acitvity');
 	}
 
 }

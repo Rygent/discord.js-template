@@ -1,4 +1,5 @@
 import Event from '../../Structures/Event.js';
+import { default as Util } from '../../Structures/Util.js';
 
 export default class extends Event {
 
@@ -33,7 +34,7 @@ export default class extends Event {
 				if (memberPermCheck) {
 					const missing = message.channel.permissionsFor(message.member).missing(memberPermCheck);
 					if (missing.length) {
-						return message.reply({ content: `You lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` });
+						return message.reply({ content: `You lack the ${Util.formatArray(missing.map(perms => `***${Util.formatPermissions(perms)}***`))} permission(s) to continue.` });
 					}
 				}
 
@@ -41,7 +42,7 @@ export default class extends Event {
 				if (clientPermCheck) {
 					const missing = message.channel.permissionsFor(message.guild.me).missing(clientPermCheck);
 					if (missing.length) {
-						return message.reply({ content: `I lack the ${this.client.utils.formatArray(missing.map(perms => `***${this.client.utils.formatPermissions(perms)}***`))} permission(s) to continue.` });
+						return message.reply({ content: `I lack the ${Util.formatArray(missing.map(perms => `***${Util.formatPermissions(perms)}***`))} permission(s) to continue.` });
 					}
 				}
 			}
