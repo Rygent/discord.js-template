@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "start": "node src/index.js",
-    "build:cmd": "node script/deploy.js",
+    "deploy": "node scripts/deploy.js",
     "lint": "eslint . --ext .js",
     "lint:fix": "eslint . --ext .js --fix",
     "update": "yarn upgrade-interactive --latest"
