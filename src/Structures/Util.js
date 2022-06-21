@@ -1,4 +1,4 @@
-import { URL } from 'node:url';
+import { URL, fileURLToPath, pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 import path from 'node:path';
 import glob from 'glob';
@@ -21,9 +21,8 @@ export default class Util {
 	}
 
 	get directory() {
-		const { pathname } = new URL('../index.js', import.meta.url);
-		if (process.platform === 'win32') return `${path.dirname(pathname.slice(1)) + path.sep}`.replace(/\\/g, '/');
-		else return `${path.dirname(pathname) + path.sep}`.replace(/\\/g, '/');
+		const main = fileURLToPath(new URL('../index.js', import.meta.url));
+		return `${path.dirname(main) + path.sep}`.replace(/\\/g, '/');
 	}
 
 	formatArray(array, { style = 'short', type = 'conjunction' } = {}) {
@@ -46,7 +45,7 @@ export default class Util {
 		return globber(`${this.directory}Commands/?(Context|Slash)/**/*.js`).then(async (interactions) => {
 			for (const interactionFile of interactions) {
 				const { name } = path.parse(interactionFile);
-				const { default: File } = await import(`file://${interactionFile}`);
+				const { default: File } = await import(pathToFileURL(interactionFile));
 				if (!this.isClass(File)) throw new TypeError(`Interaction ${name} doesn't export a class.`);
 				const interaction = new File(this.client, name.toLowerCase());
 				if (!(interaction instanceof Interaction)) throw new TypeError(`Interaction ${name} doesn't belong in Interactions directory.`);
@@ -59,7 +58,7 @@ export default class Util {
 		return globber(`${this.directory}Commands/?(Message)/**/*.js`).then(async (commands) => {
 			for (const commandFile of commands) {
 				const { name } = path.parse(commandFile);
-				const { default: File } = await import(`file://${commandFile}`);
+				const { default: File } = await import(pathToFileURL(commandFile));
 				if (!this.isClass(File)) throw new TypeError(`Command ${name} doesn't export a class.`);
 				const command = new File(this.client, name.toLowerCase());
 				if (!(command instanceof Command)) throw new TypeError(`Command ${name} doesn't belong in Commands directory.`);
@@ -77,7 +76,7 @@ export default class Util {
 		return globber(`${this.directory}Events/**/*.js`).then(async (events) => {
 			for (const eventFile of events) {
 				const { name } = path.parse(eventFile);
-				const { default: File } = await import(`file://${eventFile}`);
+				const { default: File } = await import(pathToFileURL(eventFile));
 				if (!this.isClass(File)) throw new TypeError(`Event ${name} doesn't export a class!`);
 				const event = new File(this.client, name);
 				if (!(event instanceof Event)) throw new TypeError(`Event ${name} doesn't belong in Events directory.`);
