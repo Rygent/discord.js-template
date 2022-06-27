@@ -13,6 +13,9 @@
   "license": "GPL-3.0",
   "private": true,
   "devDependencies": {
+    "@babel/core": "^7.18.5",
+    "@babel/eslint-parser": "^7.18.2",
+    "@babel/plugin-syntax-import-assertions": "^7.17.12",
     "eslint": "^8.17.0",
     "semver": "^7.3.7"
   },
