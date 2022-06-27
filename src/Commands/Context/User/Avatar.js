@@ -16,7 +16,7 @@ export default class extends Command {
 		const button = new MessageButton()
 			.setStyle('LINK')
 			.setLabel('Open in Browser')
-			.setURL(member.displayAvatarURL({ fromat: 'png', dynamic: true, size: 4096 }));
+			.setURL(member.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 }));
 
 		const row = new MessageActionRow()
 			.addComponents(button);
