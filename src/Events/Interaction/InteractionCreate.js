@@ -48,7 +48,7 @@ export default class extends Event {
 			try {
 				await command.run(interaction);
 			} catch (error) {
-				if (interaction.replied) return;
+				if (interaction.replied || error.name === 'DiscordAPIError[10062]') return;
 				console.error(error);
 
 				if (interaction.deferred) return interaction.editReply({ content: 'An error has occured when executing this command.' });
