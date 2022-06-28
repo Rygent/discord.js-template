@@ -6,8 +6,6 @@ import { formatArray, formatBytes } from '../../../Structures/Util.js';
 import pkg from '../../../../package.json' assert { type: 'json' };
 import os from 'node:os';
 
-const { version: BOTVersion } = pkg;
-
 export default class extends Command {
 
 	constructor(...args) {
@@ -29,7 +27,7 @@ export default class extends Command {
 			.setDescription([
 				`***ID:*** \`${this.client.user.id}\``,
 				`***Developer:*** ${formatArray(this.client.owners.map(user => Formatters.userMention(user)))}`,
-				`***Version:*** v${BOTVersion}`,
+				`***Version:*** v${pkg.version}`,
 				`***Node.JS:*** ${process.version}`,
 				`***Library:*** Discord.JS v${DJSVersion}`,
 				`***Registered:*** ${Formatters.time(new Date(this.client.user.createdAt), 'D')} (${Formatters.time(new Date(this.client.user.createdAt), 'R')})`

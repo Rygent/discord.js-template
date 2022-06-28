@@ -1,4 +1,4 @@
-import { Client, Intents, Permissions } from 'discord.js';
+import { Client, Constants, Intents, Permissions } from 'discord.js';
 import { Collection } from '@discordjs/collection';
 import Util from './Util.js';
 import semver from 'semver';
@@ -12,7 +12,9 @@ export default class BaseClient extends Client {
 				Intents.FLAGS.GUILD_MEMBERS,
 				Intents.FLAGS.GUILD_MESSAGES
 			],
-			partials: ['CHANNEL'],
+			partials: [
+				Constants.PartialTypes.CHANNEL
+			],
 			allowedMentions: {
 				parse: ['users', 'roles'],
 				repliedUser: false
@@ -31,7 +33,7 @@ export default class BaseClient extends Client {
 
 	validate(options) {
 		if (typeof options !== 'object') throw new TypeError('Options should be a type of Object.');
-		if (semver.lt(process.versions.node, '16.6.0')) throw new Error('This client requires Node.js v16.6.0 or higher.');
+		if (semver.lt(process.versions.node, '16.14.0')) throw new Error('This client requires Node.js v16.14.0 or higher.');
 		this.debug = options.debug;
 
 		if (!options.token) throw new Error('You must pass the token for the Client.');
@@ -51,9 +53,9 @@ export default class BaseClient extends Client {
 	}
 
 	async start(token = this.token) {
-		this.utils.loadInteractions();
-		this.utils.loadCommands();
-		this.utils.loadEvents();
+		await this.utils.loadInteractions();
+		await this.utils.loadCommands();
+		await this.utils.loadEvents();
 		super.login(token);
 	}
 

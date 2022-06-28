@@ -1,11 +1,10 @@
 import { REST } from '@discordjs/rest';
 import { Routes } from 'discord-api-types/v9';
-import { URL, fileURLToPath, pathToFileURL } from 'node:url';
+import { fileURLToPath, pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
 import path from 'node:path';
 import glob from 'glob';
 import 'dotenv/config';
-
 const globber = promisify(glob);
 
 export async function deploy() {

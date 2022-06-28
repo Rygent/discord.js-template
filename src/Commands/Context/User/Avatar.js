@@ -13,13 +13,11 @@ export default class extends Command {
 	async run(interaction) {
 		const member = await interaction.options.getMember('user');
 
-		const button = new MessageButton()
-			.setStyle('LINK')
-			.setLabel('Open in Browser')
-			.setURL(member.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 }));
-
-		const row = new MessageActionRow()
-			.addComponents(button);
+		const button = new MessageActionRow()
+			.addComponents(new MessageButton()
+				.setStyle('LINK')
+				.setLabel('Open in Browser')
+				.setURL(member.displayAvatarURL({ format: 'png', dynamic: true, size: 4096 })));
 
 		const embed = new MessageEmbed()
 			.setColor(Colors.Default)
@@ -28,7 +26,7 @@ export default class extends Command {
 			.setImage(member.displayAvatarURL({ dynamic: true, size: 512 }))
 			.setFooter({ text: `Powered by ${this.client.user.username}`, iconURL: interaction.user.avatarURL({ dynamic: true }) });
 
-		return interaction.reply({ embeds: [embed], components: [row], ephemeral: true });
+		return interaction.reply({ embeds: [embed], components: [button], ephemeral: true });
 	}
 
 }

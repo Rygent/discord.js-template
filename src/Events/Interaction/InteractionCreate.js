@@ -64,11 +64,8 @@ export default class extends Event {
 		const subCommand = interaction.options.getSubcommand(false);
 
 		if (subCommand) {
-			if (subCommandGroup) {
-				command = `${commandName}-${subCommandGroup}-${subCommand}`;
-			} else {
-				command = `${commandName}-${subCommand}`;
-			}
+			if (subCommandGroup) command = `${commandName}-${subCommandGroup}-${subCommand}`;
+			else command = `${commandName}-${subCommand}`;
 		} else {
 			command = commandName;
 		}
