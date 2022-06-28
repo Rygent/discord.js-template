@@ -70,27 +70,27 @@ export default class Util {
 		});
 	}
 
-	static formatArray(array, { style = 'short', type = 'conjunction' } = {}) {
-		return new Intl.ListFormat('en-US', { style, type }).format(array);
-	}
+}
 
-	static formatBytes(bytes) {
-		if (bytes === 0) return '0 Bytes';
-		const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-		const i = Math.floor(Math.log(bytes) / Math.log(1024));
-		return `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`;
-	}
+export function formatArray(array, { style = 'short', type = 'conjunction' } = {}) {
+	return new Intl.ListFormat('en-US', { style, type }).format(array);
+}
 
-	static formatPermissions(permissions) {
-		return permissions.toLowerCase()
-			.replace(/(^|"|_)(\S)/g, (string) => string.toUpperCase())
-			.replace(/_/g, ' ')
-			.replace(/To|And|In\b/g, (string) => string.toLowerCase())
-			.replace(/ Instant| Embedded/g, '')
-			.replace(/Guild/g, 'Server')
-			.replace(/Moderate/g, 'Timeout')
-			.replace(/Tts/g, 'Text-to-Speech')
-			.replace(/Use Vad/g, 'Use Voice Acitvity');
-	}
+export function formatBytes(bytes) {
+	if (bytes === 0) return '0 Bytes';
+	const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+	const i = Math.floor(Math.log(bytes) / Math.log(1024));
+	return `${parseFloat((bytes / Math.pow(1024, i)).toFixed(2))} ${sizes[i]}`;
+}
 
+export function formatPermissions(permissions) {
+	return permissions.toLowerCase()
+		.replace(/(^|"|_)(\S)/g, (string) => string.toUpperCase())
+		.replace(/_/g, ' ')
+		.replace(/To|And|In\b/g, (string) => string.toLowerCase())
+		.replace(/ Instant| Embedded/g, '')
+		.replace(/Guild/g, 'Server')
+		.replace(/Moderate/g, 'Timeout')
+		.replace(/Tts/g, 'Text-to-Speech')
+		.replace(/Use Vad/g, 'Use Voice Acitvity');
 }

@@ -2,7 +2,7 @@ import Command from '../../../Structures/Command.js';
 import { Formatters, MessageEmbed, version as DJSVersion } from 'discord.js';
 import { DurationFormatter } from '@sapphire/time-utilities';
 import { Colors } from '../../../Utils/Constants.js';
-import { default as Util } from '../../../Structures/Util.js';
+import { formatArray, formatBytes } from '../../../Structures/Util.js';
 import pkg from '../../../../package.json' assert { type: 'json' };
 import os from 'node:os';
 
@@ -28,7 +28,7 @@ export default class extends Command {
 			.setThumbnail(this.client.user.displayAvatarURL({ dynamic: true, size: 512 }))
 			.setDescription([
 				`***ID:*** \`${this.client.user.id}\``,
-				`***Developer:*** ${Util.formatArray(this.client.owners.map(user => Formatters.userMention(user)))}`,
+				`***Developer:*** ${formatArray(this.client.owners.map(user => Formatters.userMention(user)))}`,
 				`***Version:*** v${BOTVersion}`,
 				`***Node.JS:*** ${process.version}`,
 				`***Library:*** Discord.JS v${DJSVersion}`,
@@ -37,7 +37,7 @@ export default class extends Command {
 			.addFields([{ name: '__System__', value: [
 				`***Platform:*** ${os.type} ${os.release} ${os.arch}`,
 				`***CPU:*** ${os.cpus()[0].model} ${os.cpus().length} Cores ${os.cpus()[0].speed}MHz`,
-				`***Memory:*** ${Util.formatBytes(process.memoryUsage().heapUsed)} / ${Util.formatBytes(process.memoryUsage().heapTotal)}`,
+				`***Memory:*** ${formatBytes(process.memoryUsage().heapUsed)} / ${formatBytes(process.memoryUsage().heapTotal)}`,
 				`***Uptime:*** ${duration.format(this.client.uptime, undefined, { right: ', ' })}`,
 				`***Host:*** ${duration.format(os.uptime * 1000, undefined, { right: ', ' })}`
 			].join('\n'), inline: false }])
