@@ -322,17 +322,17 @@
   resolved "https://registry.yarnpkg.com/@sapphire/snowflake/-/snowflake-3.2.2.tgz#faacdc1b5f7c43145a71eddba917de2b707ef780"
   integrity sha512-ula2O0kpSZtX9rKXNeQMrHwNd7E4jPDJYUXmEGTFdMRfyfMw+FPyh04oKMjAiDuOi64bYgVkOV3MjK+loImFhQ==
 
-"@sapphire/time-utilities@^1.7.4":
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/@sapphire/time-utilities/-/time-utilities-1.7.4.tgz#5f47de3741b77ae9752e8e45958461d92bc4420a"
-  integrity sha512-/MKy56iGYuOfZfXGxZ2RG0otk9j3P0VRC6ACSnizalEXbe0YFXX7JcxPPBF1yp2j1p5Y7eUW+FTExfvEgnWnzg==
+"@sapphire/time-utilities@^1.7.5":
+  version "1.7.5"
+  resolved "https://registry.yarnpkg.com/@sapphire/time-utilities/-/time-utilities-1.7.5.tgz#e5d22db355f4ce10f9e4dd8a46227a9bab56800e"
+  integrity sha512-QLYUCIhnntEWZugY+E0/2fmFPn/ARV1ZP0LLUcowBpC7+U4NmDi12iQ9dJmM+14PmI45J2nUWFJ7ocKCMfCr5g==
   dependencies:
-    "@sapphire/utilities" "^3.6.2"
+    "@sapphire/utilities" "^3.7.0"
 
-"@sapphire/utilities@^3.6.2":
-  version "3.6.2"
-  resolved "https://registry.yarnpkg.com/@sapphire/utilities/-/utilities-3.6.2.tgz#ec238e3e789dd5b04009a5cefecd3a64a4bb985d"
-  integrity sha512-Rmwq5QxWxuAYCrtIXo2a9UW1Fa5Pmmfc20QSRRp+rz/CXzel1R3171DjvT7iZTAfuxwUFp2FYG6IaywoSIyjFA==
+"@sapphire/utilities@^3.7.0":
+  version "3.7.0"
+  resolved "https://registry.yarnpkg.com/@sapphire/utilities/-/utilities-3.7.0.tgz#ec08837324a91fe58790f2961f2e874a82203247"
+  integrity sha512-UTNEl01618p5z+bRlCxauoiK0uQ2VW6uxCV91Bj41soQwl+mbAduxyLj1W956Vk+Mvvm1UQfgjMhw3HYL+1SPQ==
 
 "@sindresorhus/is@^4.6.0":
   version "4.6.0"
