@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@anishshobith/deeptype": "^1.1.0",
-    "@discordjs/rest": "^0.5.0",
+    "@discordjs/rest": "^0.6.0",
     "@sapphire/time-utilities": "^1.7.5",
     "discord.js": "^13.8.1",
     "dotenv": "^16.0.1",
